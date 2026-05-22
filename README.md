@@ -7,42 +7,9 @@ This project deploys the Alchemyst AI quickstart across two AWS EC2 VMs in a pri
 ---
 
 ## Architecture
+![Distributed Inference System Architecture](./diagrams/architecture.png)
 
-```
-Internet
-    │
-    │  POST /v1/chat/completions
-    ▼
-┌─────────────────────────────────────────────────────────┐
-│  AWS VPC — eu-west-1 (10.0.0.0/16)                     │
-│                                                         │
-│  ┌─────────────────────────┐  Public Subnet             │
-│  │   caller-worker VM      │  10.0.1.0/24               │
-│  │   t3.micro              │                            │
-│  │   IP: 3.250.197.174     │◄── Port 3111 (HTTP API)   │
-│  │                         │                            │
-│  │  • iii engine           │                            │
-│  │  • TypeScript worker    │                            │
-│  │  • HTTP endpoint        │                            │
-│  └────────────┬────────────┘                            │
-│               │                                         │
-│               │  WebSocket RPC (port 49134)             │
-│               │  Private subnet only                    │
-│               │                                         │
-│  ┌────────────▼────────────┐  Private Subnet            │
-│  │   inference-worker VM   │  10.0.2.0/24               │
-│  │   t3.small              │                            │
-│  │   IP: 10.0.2.144        │  ← NO public IP            │
-│  │                         │                            │
-│  │  • Python worker        │                            │
-│  │  • Gemma 3 270M GGUF    │                            │
-│  │  • inference::run_inference │                        │
-│  └─────────────────────────┘                            │
-│                                                         │
-│  NAT Gateway — allows inference VM to download          │
-│  packages without exposing it to inbound traffic        │
-└─────────────────────────────────────────────────────────┘
-```
+The architecture consists of a public API gateway VM running the TypeScript worker and iii engine, and a private inference VM running the Python inference worker hosting the Gemma 3 270M model. Communication between workers occurs over private WebSocket RPC within the VPC subnet.
 
 ### RPC Flow
 
