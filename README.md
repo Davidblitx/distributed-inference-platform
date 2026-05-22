@@ -8,7 +8,7 @@ This project deploys the Alchemyst AI quickstart across two AWS EC2 VMs in a pri
 ---
 
 ## Architecture
-![Distributed Inference System Architecture](./diagrams/architecture.png)
+![Distributed Inference System Architecture](diagrams/architecture.png)
 
 The architecture consists of a public API gateway VM running the TypeScript worker and iii engine, and a private inference VM running the Python inference worker hosting the Gemma 3 270M model. Communication between workers occurs over private WebSocket RPC within the VPC subnet.
 
