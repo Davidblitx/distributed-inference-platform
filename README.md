@@ -1,4 +1,4 @@
-# DevOps Internship Assignment — Distributed Inference System
+# Distributed Inference System - DevOps Internship Assignment
 
 ## Overview
 
