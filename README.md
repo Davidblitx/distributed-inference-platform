@@ -1,4 +1,5 @@
 # Distributed Inference System - DevOps Internship Assignment
+A distributed AI inference system deployed on AWS using private networking, RPC-based worker communication, and Infrastructure-as-Code.
 
 ## Overview
 
