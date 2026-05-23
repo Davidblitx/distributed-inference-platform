@@ -62,7 +62,7 @@ curl -X POST http://3.250.197.174:3111/v1/chat/completions \
 {
   "result": {
     "response": "Hello! It's great to meet you.",
-    "success": "You've connected two workers and they're interoperating seamlessly."
+    "success": "You've connected two workers, and they're interoperating seamlessly."
   }
 }
 ```
@@ -137,8 +137,8 @@ curl -X POST http://<caller_public_ip>:3111/v1/chat/completions \
 If I were to put this in production, I would address the following:
 
 **Network Security**
-- Put the API behind an Application Load Balancer with HTTPS/TLS termination. Right now HTTP traffic is unencrypted.
-- Restrict port 3111 to known IP ranges rather than open to the world.
+- Put the API behind an Application Load Balancer with HTTPS/TLS termination. Right now, HTTP traffic is unencrypted.
+- Restrict port 3111 to known IP ranges rather than open it to the world.
 - Enable VPC Flow Logs to audit all network traffic in and out of the subnet.
 - Remove the NAT Gateway after initial setup and use VPC Endpoints for S3/ECR access to reduce attack surface.
 
